@@ -637,20 +637,29 @@ var qtyInput = document.getElementById('qty-input');
 qtyInput.parentNode.insertBefore(plusBtn, qtyInput.nextSibling.nextSibling);
  
  
-// ── Search Open Food Facts ──
+// ── Base de données Ciqual (France) ──
+var CIQUAL_DB = [{"name": "Boeuf, steak haché 5% MG", "kcal": 121, "prot": 21.0, "carb": 0, "fiber": 0}, {"name": "Boeuf, steak haché 15% MG", "kcal": 185, "prot": 18.0, "carb": 0, "fiber": 0}, {"name": "Boeuf, entrecôte", "kcal": 196, "prot": 19.0, "carb": 0, "fiber": 0}, {"name": "Boeuf, filet", "kcal": 145, "prot": 20.5, "carb": 0, "fiber": 0}, {"name": "Veau, escalope", "kcal": 109, "prot": 20.7, "carb": 0, "fiber": 0}, {"name": "Agneau, côtelette", "kcal": 235, "prot": 16.5, "carb": 0, "fiber": 0}, {"name": "Porc, filet", "kcal": 120, "prot": 21.4, "carb": 0, "fiber": 0}, {"name": "Porc, côte", "kcal": 190, "prot": 17.5, "carb": 0, "fiber": 0}, {"name": "Poulet, blanc", "kcal": 110, "prot": 23.0, "carb": 0, "fiber": 0}, {"name": "Poulet, cuisse", "kcal": 148, "prot": 18.0, "carb": 0, "fiber": 0}, {"name": "Poulet, entier rôti", "kcal": 186, "prot": 27.0, "carb": 0, "fiber": 0}, {"name": "Dinde, escalope", "kcal": 104, "prot": 23.5, "carb": 0, "fiber": 0}, {"name": "Canard, magret", "kcal": 200, "prot": 19.0, "carb": 0, "fiber": 0}, {"name": "Lapin, cuisse", "kcal": 115, "prot": 20.0, "carb": 0, "fiber": 0}, {"name": "Jambon blanc, sans couenne", "kcal": 107, "prot": 17.5, "carb": 1.2, "fiber": 0}, {"name": "Jambon de Bayonne", "kcal": 215, "prot": 26.0, "carb": 0.5, "fiber": 0}, {"name": "Bacon, tranches", "kcal": 270, "prot": 15.0, "carb": 0, "fiber": 0}, {"name": "Saucisse de Strasbourg", "kcal": 284, "prot": 12.5, "carb": 1.0, "fiber": 0}, {"name": "Merguez", "kcal": 285, "prot": 14.5, "carb": 1.5, "fiber": 0}, {"name": "Chipolata", "kcal": 280, "prot": 13.0, "carb": 2.0, "fiber": 0}, {"name": "Chorizo", "kcal": 375, "prot": 22.0, "carb": 1.5, "fiber": 0}, {"name": "Saumon, filet cru", "kcal": 179, "prot": 19.8, "carb": 0, "fiber": 0}, {"name": "Saumon, cuit vapeur", "kcal": 196, "prot": 23.0, "carb": 0, "fiber": 0}, {"name": "Saumon fumé", "kcal": 172, "prot": 25.0, "carb": 0, "fiber": 0}, {"name": "Thon, naturel en conserve", "kcal": 116, "prot": 25.5, "carb": 0, "fiber": 0}, {"name": "Thon, à l'huile en conserve", "kcal": 200, "prot": 22.0, "carb": 0, "fiber": 0}, {"name": "Cabillaud, filet", "kcal": 82, "prot": 18.0, "carb": 0, "fiber": 0}, {"name": "Sole, filet", "kcal": 83, "prot": 18.5, "carb": 0, "fiber": 0}, {"name": "Bar (loup)", "kcal": 97, "prot": 18.5, "carb": 0, "fiber": 0}, {"name": "Dorade", "kcal": 96, "prot": 18.5, "carb": 0, "fiber": 0}, {"name": "Sardine, à l'huile en conserve", "kcal": 208, "prot": 24.0, "carb": 0, "fiber": 0}, {"name": "Maquereau, filet", "kcal": 173, "prot": 19.0, "carb": 0, "fiber": 0}, {"name": "Crevettes, décortiquées", "kcal": 84, "prot": 18.0, "carb": 0.5, "fiber": 0}, {"name": "Moules, cuites", "kcal": 86, "prot": 14.0, "carb": 3.0, "fiber": 0}, {"name": "Saint-Jacques, noix crues", "kcal": 88, "prot": 17.0, "carb": 2.4, "fiber": 0}, {"name": "Oeuf entier, cru", "kcal": 143, "prot": 12.6, "carb": 0.7, "fiber": 0}, {"name": "Blanc d'oeuf", "kcal": 49, "prot": 11.1, "carb": 0.7, "fiber": 0}, {"name": "Jaune d'oeuf", "kcal": 322, "prot": 15.9, "carb": 0.3, "fiber": 0}, {"name": "Oeuf dur", "kcal": 155, "prot": 13.0, "carb": 0.8, "fiber": 0}, {"name": "Lait entier", "kcal": 65, "prot": 3.2, "carb": 4.8, "fiber": 0}, {"name": "Lait demi-écrémé", "kcal": 46, "prot": 3.2, "carb": 4.8, "fiber": 0}, {"name": "Lait écrémé", "kcal": 36, "prot": 3.4, "carb": 5.0, "fiber": 0}, {"name": "Yaourt nature, entier", "kcal": 61, "prot": 4.0, "carb": 4.5, "fiber": 0}, {"name": "Yaourt nature, 0% MG", "kcal": 36, "prot": 4.3, "carb": 4.5, "fiber": 0}, {"name": "Skyr nature", "kcal": 63, "prot": 11.0, "carb": 4.0, "fiber": 0}, {"name": "Fromage blanc 0% MG", "kcal": 40, "prot": 8.0, "carb": 3.0, "fiber": 0}, {"name": "Fromage blanc 40% MG", "kcal": 113, "prot": 7.5, "carb": 3.5, "fiber": 0}, {"name": "Cottage cheese", "kcal": 78, "prot": 11.0, "carb": 3.0, "fiber": 0}, {"name": "Ricotta", "kcal": 134, "prot": 8.9, "carb": 3.0, "fiber": 0}, {"name": "Quark 0% MG", "kcal": 67, "prot": 12.0, "carb": 4.0, "fiber": 0}, {"name": "Crème fraîche entière", "kcal": 292, "prot": 2.4, "carb": 3.1, "fiber": 0}, {"name": "Crème fraîche légère 15%", "kcal": 155, "prot": 2.9, "carb": 4.2, "fiber": 0}, {"name": "Beurre", "kcal": 745, "prot": 0.6, "carb": 0.6, "fiber": 0}, {"name": "Camembert", "kcal": 264, "prot": 17.0, "carb": 0.5, "fiber": 0}, {"name": "Brie", "kcal": 320, "prot": 17.0, "carb": 0.5, "fiber": 0}, {"name": "Comté", "kcal": 415, "prot": 27.0, "carb": 0, "fiber": 0}, {"name": "Emmental", "kcal": 382, "prot": 28.5, "carb": 0.5, "fiber": 0}, {"name": "Gruyère", "kcal": 390, "prot": 27.0, "carb": 0, "fiber": 0}, {"name": "Mozzarella entière", "kcal": 250, "prot": 18.0, "carb": 2.0, "fiber": 0}, {"name": "Mozzarella légère", "kcal": 154, "prot": 18.5, "carb": 2.0, "fiber": 0}, {"name": "Parmesan", "kcal": 392, "prot": 33.0, "carb": 0, "fiber": 0}, {"name": "Feta", "kcal": 264, "prot": 14.5, "carb": 0.5, "fiber": 0}, {"name": "Chèvre frais", "kcal": 218, "prot": 13.5, "carb": 0.5, "fiber": 0}, {"name": "Riz blanc, cru", "kcal": 350, "prot": 7.0, "carb": 77.0, "fiber": 1.3}, {"name": "Riz blanc, cuit", "kcal": 130, "prot": 2.7, "carb": 28.0, "fiber": 0.5}, {"name": "Riz complet, cuit", "kcal": 112, "prot": 2.6, "carb": 23.0, "fiber": 1.8}, {"name": "Pâtes, sèches", "kcal": 352, "prot": 13.0, "carb": 70.0, "fiber": 2.5}, {"name": "Pâtes, cuites", "kcal": 131, "prot": 5.0, "carb": 26.0, "fiber": 1.0}, {"name": "Pâtes complètes, cuites", "kcal": 124, "prot": 5.2, "carb": 24.0, "fiber": 3.0}, {"name": "Flocons d'avoine", "kcal": 372, "prot": 13.0, "carb": 60.0, "fiber": 8.5}, {"name": "Pain de mie blanc", "kcal": 255, "prot": 8.0, "carb": 48.0, "fiber": 2.5}, {"name": "Pain complet", "kcal": 224, "prot": 8.5, "carb": 41.0, "fiber": 7.0}, {"name": "Pain de seigle", "kcal": 214, "prot": 7.2, "carb": 42.0, "fiber": 6.5}, {"name": "Baguette", "kcal": 270, "prot": 9.0, "carb": 55.0, "fiber": 2.3}, {"name": "Quinoa, cuit", "kcal": 120, "prot": 4.4, "carb": 21.0, "fiber": 2.8}, {"name": "Boulgour, cuit", "kcal": 83, "prot": 3.1, "carb": 18.0, "fiber": 2.2}, {"name": "Couscous, cuit", "kcal": 112, "prot": 3.8, "carb": 23.0, "fiber": 1.5}, {"name": "Pomme de terre, bouillie", "kcal": 73, "prot": 1.9, "carb": 16.0, "fiber": 1.2}, {"name": "Pomme de terre, rôtie", "kcal": 149, "prot": 2.5, "carb": 29.0, "fiber": 2.0}, {"name": "Patate douce, cuite", "kcal": 86, "prot": 1.6, "carb": 20.0, "fiber": 2.5}, {"name": "Lentilles vertes, cuites", "kcal": 116, "prot": 9.0, "carb": 20.0, "fiber": 7.5}, {"name": "Lentilles corail, cuites", "kcal": 104, "prot": 8.5, "carb": 17.0, "fiber": 4.0}, {"name": "Pois chiches, en conserve", "kcal": 119, "prot": 7.5, "carb": 18.0, "fiber": 6.0}, {"name": "Haricots rouges, en conserve", "kcal": 95, "prot": 6.5, "carb": 16.0, "fiber": 6.0}, {"name": "Haricots blancs, en conserve", "kcal": 95, "prot": 7.0, "carb": 16.0, "fiber": 5.5}, {"name": "Edamame, cuits", "kcal": 122, "prot": 11.0, "carb": 8.5, "fiber": 5.0}, {"name": "Tofu ferme", "kcal": 76, "prot": 8.0, "carb": 1.9, "fiber": 0.3}, {"name": "Brocoli, cuit", "kcal": 28, "prot": 2.5, "carb": 5.0, "fiber": 2.5}, {"name": "Haricots verts, cuits", "kcal": 24, "prot": 1.8, "carb": 4.5, "fiber": 3.0}, {"name": "Courgette, cuite", "kcal": 19, "prot": 1.3, "carb": 3.5, "fiber": 1.0}, {"name": "Tomate", "kcal": 18, "prot": 0.9, "carb": 3.5, "fiber": 1.2}, {"name": "Concombre", "kcal": 12, "prot": 0.6, "carb": 2.2, "fiber": 0.7}, {"name": "Salade verte", "kcal": 13, "prot": 1.3, "carb": 2.0, "fiber": 1.3}, {"name": "Épinards, cuits", "kcal": 20, "prot": 2.6, "carb": 3.0, "fiber": 2.0}, {"name": "Champignons de Paris", "kcal": 22, "prot": 3.1, "carb": 3.3, "fiber": 1.0}, {"name": "Poivron rouge", "kcal": 27, "prot": 1.0, "carb": 6.0, "fiber": 2.1}, {"name": "Carotte", "kcal": 35, "prot": 0.8, "carb": 7.5, "fiber": 2.9}, {"name": "Chou-fleur, cuit", "kcal": 22, "prot": 2.0, "carb": 4.0, "fiber": 2.0}, {"name": "Aubergine, cuite", "kcal": 24, "prot": 0.9, "carb": 5.5, "fiber": 2.5}, {"name": "Avocat", "kcal": 160, "prot": 2.0, "carb": 9.0, "fiber": 7.0}, {"name": "Maïs doux, en conserve", "kcal": 86, "prot": 2.7, "carb": 19.0, "fiber": 1.5}, {"name": "Pomme", "kcal": 52, "prot": 0.3, "carb": 14.0, "fiber": 2.4}, {"name": "Banane", "kcal": 89, "prot": 1.1, "carb": 23.0, "fiber": 2.6}, {"name": "Orange", "kcal": 47, "prot": 0.9, "carb": 12.0, "fiber": 2.4}, {"name": "Kiwi", "kcal": 61, "prot": 1.1, "carb": 15.0, "fiber": 3.0}, {"name": "Fraise", "kcal": 32, "prot": 0.7, "carb": 7.7, "fiber": 2.0}, {"name": "Framboise", "kcal": 52, "prot": 1.2, "carb": 12.0, "fiber": 6.5}, {"name": "Myrtille", "kcal": 57, "prot": 0.7, "carb": 14.5, "fiber": 2.4}, {"name": "Mangue", "kcal": 65, "prot": 0.5, "carb": 17.0, "fiber": 1.6}, {"name": "Ananas", "kcal": 50, "prot": 0.5, "carb": 13.0, "fiber": 1.4}, {"name": "Poire", "kcal": 57, "prot": 0.4, "carb": 15.0, "fiber": 3.1}, {"name": "Pêche", "kcal": 39, "prot": 0.9, "carb": 9.5, "fiber": 1.5}, {"name": "Raisin", "kcal": 67, "prot": 0.6, "carb": 17.0, "fiber": 0.9}, {"name": "Cerise", "kcal": 63, "prot": 1.1, "carb": 16.0, "fiber": 1.6}, {"name": "Amandes", "kcal": 579, "prot": 21.0, "carb": 22.0, "fiber": 12.5}, {"name": "Noix", "kcal": 654, "prot": 15.0, "carb": 14.0, "fiber": 6.7}, {"name": "Noisettes", "kcal": 628, "prot": 15.0, "carb": 17.0, "fiber": 9.7}, {"name": "Noix de cajou", "kcal": 553, "prot": 18.0, "carb": 30.0, "fiber": 3.3}, {"name": "Pistaches", "kcal": 562, "prot": 20.0, "carb": 28.0, "fiber": 10.6}, {"name": "Cacahuètes", "kcal": 567, "prot": 26.0, "carb": 16.0, "fiber": 8.5}, {"name": "Graines de chia", "kcal": 486, "prot": 17.0, "carb": 42.0, "fiber": 34.0}, {"name": "Huile d'olive", "kcal": 900, "prot": 0, "carb": 0, "fiber": 0}, {"name": "Huile de colza", "kcal": 900, "prot": 0, "carb": 0, "fiber": 0}, {"name": "Beurre de cacahuète", "kcal": 588, "prot": 25.0, "carb": 20.0, "fiber": 6.0}, {"name": "Whey protéine, poudre", "kcal": 380, "prot": 75.0, "carb": 10.0, "fiber": 0}, {"name": "Caséine, poudre", "kcal": 360, "prot": 80.0, "carb": 6.0, "fiber": 0}, {"name": "Lait de soja", "kcal": 40, "prot": 3.3, "carb": 2.8, "fiber": 0.5}, {"name": "Chocolat noir 70%", "kcal": 546, "prot": 7.8, "carb": 46.0, "fiber": 10.9}, {"name": "Mayonnaise", "kcal": 680, "prot": 1.4, "carb": 2.5, "fiber": 0}, {"name": "Ketchup", "kcal": 100, "prot": 1.5, "carb": 24.0, "fiber": 0.8}, {"name": "Moutarde de Dijon", "kcal": 66, "prot": 4.4, "carb": 5.5, "fiber": 2.0}, {"name": "Sauce soja", "kcal": 53, "prot": 5.6, "carb": 5.5, "fiber": 0.8}, {"name": "Miel", "kcal": 304, "prot": 0.4, "carb": 82.0, "fiber": 0}, {"name": "Farine de blé T45", "kcal": 350, "prot": 10.5, "carb": 73.0, "fiber": 2.7}, {"name": "Sucre blanc", "kcal": 400, "prot": 0, "carb": 100.0, "fiber": 0}];
+ 
+// ── Search ──
 var _searchTimer = null;
  
 document.getElementById('search-input').addEventListener('input', function(){
   var q = this.value.trim();
   document.getElementById('search-clear').classList.toggle('show', q.length > 0);
   clearTimeout(_searchTimer);
-  if (q.length < 2) {
-    document.getElementById('search-results').innerHTML = '';
-    document.getElementById('search-status').innerHTML = '';
-    return;
+  document.getElementById('search-results').innerHTML = '';
+  document.getElementById('search-status').innerHTML = '';
+  if (q.length < 2) return;
+  
+  // 1. Recherche locale Ciqual (instantanée)
+  var local = searchLocal(q);
+  showResults(local, false);
+  
+  // 2. Recherche Open Food Facts (produits de marque)
+  if (q.length >= 3) {
+    document.getElementById('search-status').innerHTML = '<div class="search-status">Recherche produits de marque...</div>';
+    _searchTimer = setTimeout(function(){ searchOFF(q, local.length); }, 600);
   }
-  document.getElementById('search-status').innerHTML = '<div class="search-status">Recherche...</div>';
-  _searchTimer = setTimeout(function(){ searchFood(q); }, 500);
 });
  
 document.getElementById('search-clear').addEventListener('click', function(){
@@ -661,66 +670,105 @@ document.getElementById('search-clear').addEventListener('click', function(){
   document.getElementById('search-input').focus();
 });
  
-function searchFood(query) {
+function normalize(str) {
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9 ]/g,' ');
+}
+ 
+function searchLocal(query) {
+  var q = normalize(query);
+  var words = q.split(' ').filter(function(w){ return w.length > 1; });
+  var results = [];
+  for (var i=0; i<CIQUAL_DB.length; i++) {
+    var food = CIQUAL_DB[i];
+    var name = normalize(food.name);
+    var score = 0;
+    for (var j=0; j<words.length; j++) {
+      if (name.indexOf(words[j]) === 0) score += 3;
+      else if (name.indexOf(' '+words[j]) !== -1) score += 2;
+      else if (name.indexOf(words[j]) !== -1) score += 1;
+    }
+    if (score > 0) results.push({food:food, score:score});
+  }
+  results.sort(function(a,b){ return b.score - a.score; });
+  return results.slice(0,6).map(function(r){ return r.food; });
+}
+ 
+function showResults(foods, isOFF) {
+  var existing = document.getElementById('search-results').innerHTML;
+  var html = '';
+  for (var i=0; i<foods.length; i++) {
+    var f = foods[i];
+    var name = f.name.length > 52 ? f.name.slice(0,50)+'...' : f.name;
+    var tag = isOFF ? '<span style="font-size:10px;color:var(--accent);margin-left:4px">marque</span>' : '<span style="font-size:10px;color:var(--green);margin-left:4px">Ciqual</span>';
+    var dataStr = JSON.stringify({name:f.name, ref:100, kcal:f.kcal, prot:f.prot, carb:f.carb, fiber:f.fiber}).replace(/"/g,'&quot;');
+    html += '<button class="search-result" data-food="'+dataStr+'">'
+          + '<div class="sr-name">'+name+tag+'</div>'
+          + (f.brand ? '<div class="sr-brand">'+f.brand+'</div>' : '')
+          + '<div class="sr-macros">pour 100g &middot; '+f.kcal+' kcal &middot; <span class="p">'+f.prot+'g P</span>'
+          + (f.carb?' &middot; '+f.carb+'g G':'')+(f.fiber?' &middot; '+f.fiber+'g F':'')+'</div>'
+          + '</button>';
+  }
+  if (isOFF) {
+    document.getElementById('search-results').innerHTML += html;
+  } else {
+    document.getElementById('search-results').innerHTML = html;
+  }
+  // Attach click events
+  var btns = document.getElementById('search-results').querySelectorAll('.search-result');
+  for (var j=0; j<btns.length; j++) {
+    btns[j].onclick = null;
+    btns[j].addEventListener('click', function(){
+      var food = JSON.parse(this.getAttribute('data-food').replace(/&quot;/g,'"'));
+      openSheetWithFood(food);
+    });
+  }
+}
+ 
+function openSheetWithFood(food) {
+  _sheetItem = food;
+  document.getElementById('sheet-title').textContent = food.name;
+  document.getElementById('qty-input').value = food.ref || 100;
+  updatePreview();
+  document.getElementById('sheet-overlay').classList.add('open');
+  document.getElementById('sheet').classList.add('open');
+  setTimeout(function(){ document.getElementById('qty-input').select(); }, 350);
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-results').innerHTML = '';
+  document.getElementById('search-status').innerHTML = '';
+  document.getElementById('search-clear').classList.remove('show');
+}
+ 
+function searchOFF(query, localCount) {
   var url = 'https://world.openfoodfacts.org/cgi/search.pl?search_terms='
     + encodeURIComponent(query)
-    + '&search_simple=1&action=process&json=1&page_size=10&lc=fr&fields=product_name,brands,nutriments,serving_size';
-  
+    + '&search_simple=1&action=process&json=1&page_size=8&lc=fr&cc=fr&fields=product_name,brands,nutriments';
   fetch(url)
     .then(function(r){ return r.json(); })
     .then(function(data){
       document.getElementById('search-status').innerHTML = '';
-      var products = data.products || [];
-      // Filter valid products with at least kcal
-      var valid = products.filter(function(p){
-        return p.product_name && p.nutriments && (p.nutriments['energy-kcal_100g'] || p.nutriments['energy-kcal']);
+      var products = (data.products || []).filter(function(p){
+        return p.product_name && p.nutriments && p.nutriments['energy-kcal_100g'];
       });
-      if (!valid.length) {
-        document.getElementById('search-status').innerHTML = '<div class="search-status">Aucun resultat</div>';
-        document.getElementById('search-results').innerHTML = '';
-        return;
-      }
-      var html = '';
-      for (var i=0; i<Math.min(valid.length,8); i++) {
-        var p = valid[i];
+      if (!products.length) return;
+      var offFoods = products.slice(0,4).map(function(p){
         var n = p.nutriments;
-        var kcal  = Math.round(n['energy-kcal_100g'] || n['energy-kcal'] || 0);
-        var prot  = Math.round((n['proteins_100g']       || 0) * 10) / 10;
-        var carb  = Math.round((n['carbohydrates_100g']  || 0) * 10) / 10;
-        var fiber = Math.round((n['fiber_100g']          || 0) * 10) / 10;
-        var brand = p.brands ? p.brands.split(',')[0].trim() : '';
-        var name  = p.product_name.length > 50 ? p.product_name.slice(0,48)+'...' : p.product_name;
-        var dataStr = JSON.stringify({name:p.product_name, ref:100, kcal:kcal, prot:prot, carb:carb, fiber:fiber}).replace(/"/g,'&quot;');
-        html += '<button class="search-result" data-food="'+dataStr+'">'
-              + '<div class="sr-name">'+name+'</div>'
-              + (brand ? '<div class="sr-brand">'+brand+'</div>' : '')
-              + '<div class="sr-macros">pour 100g &middot; '+kcal+' kcal &middot; <span class="p">'+prot+'g P</span> &middot; '+carb+'g G'+(fiber?' &middot; '+fiber+'g F':'')+'</div>'
-              + '</button>';
-      }
-      document.getElementById('search-results').innerHTML = html;
-      // Attach click events
-      var btns = document.getElementById('search-results').querySelectorAll('.search-result');
-      for (var j=0; j<btns.length; j++) {
-        btns[j].addEventListener('click', function(){
-          var food = JSON.parse(this.getAttribute('data-food').replace(/&quot;/g,'"'));
-          _sheetItem = food;
-          document.getElementById('sheet-title').textContent = food.name;
-          document.getElementById('qty-input').value = 100;
-          updatePreview();
-          document.getElementById('sheet-overlay').classList.add('open');
-          document.getElementById('sheet').classList.add('open');
-          setTimeout(function(){ document.getElementById('qty-input').select(); }, 350);
-          // Clear search
-          document.getElementById('search-input').value = '';
-          document.getElementById('search-results').innerHTML = '';
-          document.getElementById('search-status').innerHTML = '';
-          document.getElementById('search-clear').classList.remove('show');
-        });
+        return {
+          name: p.product_name,
+          brand: p.brands ? p.brands.split(',')[0].trim() : '',
+          ref: 100,
+          kcal:  Math.round(n['energy-kcal_100g'] || 0),
+          prot:  Math.round((n['proteins_100g'] || 0)*10)/10,
+          carb:  Math.round((n['carbohydrates_100g'] || 0)*10)/10,
+          fiber: Math.round((n['fiber_100g'] || 0)*10)/10
+        };
+      });
+      if (document.getElementById('search-results').innerHTML) {
+        showResults(offFoods, true);
       }
     })
-    .catch(function(){
-      document.getElementById('search-status').innerHTML = '<div class="search-status">Erreur reseau, reessayez</div>';
-    });
+    .catch(function(){ document.getElementById('search-status').innerHTML = ''; });
 }
  
 // ── Tabs ──
