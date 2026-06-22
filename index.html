@@ -169,6 +169,22 @@ main{flex:1;overflow-y:auto;padding:1.1rem;max-width:640px;width:100%;margin:0 a
   .four-cols{grid-template-columns:repeat(2,1fr)}
   .ing-nums{grid-template-columns:repeat(3,1fr)}
 }
+ 
+/* Search */
+.search-box{position:relative;margin-bottom:.75rem}
+.search-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font);font-size:15px;padding:11px 40px 11px 14px;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--accent)}
+.search-input::placeholder{color:var(--hint)}
+.search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--hint);font-size:18px;cursor:pointer;display:none;line-height:1}
+.search-clear.show{display:block}
+.search-results{display:grid;gap:6px;margin-bottom:.5rem}
+.search-result{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;transition:background .12s,border-color .12s;text-align:left;width:100%}
+.search-result:hover{background:var(--bg3);border-color:var(--accent2)}
+.sr-name{font-size:14px;font-weight:500;color:var(--text);line-height:1.3}
+.sr-brand{font-size:11px;color:var(--hint);margin-top:1px}
+.sr-macros{font-size:11px;color:var(--muted);margin-top:4px}
+.sr-macros .p{color:var(--green)}
+.search-status{font-size:12px;color:var(--hint);text-align:center;padding:.75rem 0}
 </style>
 </head>
 <body>
@@ -217,7 +233,14 @@ main{flex:1;overflow-y:auto;padding:1.1rem;max-width:640px;width:100%;margin:0 a
  
 <main>
   <div class="panel active" id="panel-add">
-    <div class="section-label" style="margin-top:0">Saisie rapide</div>
+    <div class="section-label" style="margin-top:0">Rechercher un aliment</div>
+    <div class="search-box">
+      <input class="search-input" type="text" id="search-input" placeholder="Ex: yaourt, poulet, riz..." autocomplete="off">
+      <button class="search-clear" id="search-clear">x</button>
+    </div>
+    <div id="search-status"></div>
+    <div class="search-results" id="search-results"></div>
+        <div class="section-label">Saisie rapide</div>
     <div class="fast-box">
       <div class="fast-row">
         <div class="fast-field"><label style="color:var(--accent)">Kcal</label><input type="number" id="f-kcal" placeholder="0" min="0" inputmode="numeric"></div>
@@ -612,6 +635,93 @@ plusBtn.addEventListener('click', function(){
 var qtyMinus = document.getElementById('qty-minus');
 var qtyInput = document.getElementById('qty-input');
 qtyInput.parentNode.insertBefore(plusBtn, qtyInput.nextSibling.nextSibling);
+ 
+ 
+// ── Search Open Food Facts ──
+var _searchTimer = null;
+ 
+document.getElementById('search-input').addEventListener('input', function(){
+  var q = this.value.trim();
+  document.getElementById('search-clear').classList.toggle('show', q.length > 0);
+  clearTimeout(_searchTimer);
+  if (q.length < 2) {
+    document.getElementById('search-results').innerHTML = '';
+    document.getElementById('search-status').innerHTML = '';
+    return;
+  }
+  document.getElementById('search-status').innerHTML = '<div class="search-status">Recherche...</div>';
+  _searchTimer = setTimeout(function(){ searchFood(q); }, 500);
+});
+ 
+document.getElementById('search-clear').addEventListener('click', function(){
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-results').innerHTML = '';
+  document.getElementById('search-status').innerHTML = '';
+  this.classList.remove('show');
+  document.getElementById('search-input').focus();
+});
+ 
+function searchFood(query) {
+  var url = 'https://world.openfoodfacts.org/cgi/search.pl?search_terms='
+    + encodeURIComponent(query)
+    + '&search_simple=1&action=process&json=1&page_size=10&lc=fr&fields=product_name,brands,nutriments,serving_size';
+  
+  fetch(url)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      document.getElementById('search-status').innerHTML = '';
+      var products = data.products || [];
+      // Filter valid products with at least kcal
+      var valid = products.filter(function(p){
+        return p.product_name && p.nutriments && (p.nutriments['energy-kcal_100g'] || p.nutriments['energy-kcal']);
+      });
+      if (!valid.length) {
+        document.getElementById('search-status').innerHTML = '<div class="search-status">Aucun resultat</div>';
+        document.getElementById('search-results').innerHTML = '';
+        return;
+      }
+      var html = '';
+      for (var i=0; i<Math.min(valid.length,8); i++) {
+        var p = valid[i];
+        var n = p.nutriments;
+        var kcal  = Math.round(n['energy-kcal_100g'] || n['energy-kcal'] || 0);
+        var prot  = Math.round((n['proteins_100g']       || 0) * 10) / 10;
+        var carb  = Math.round((n['carbohydrates_100g']  || 0) * 10) / 10;
+        var fiber = Math.round((n['fiber_100g']          || 0) * 10) / 10;
+        var brand = p.brands ? p.brands.split(',')[0].trim() : '';
+        var name  = p.product_name.length > 50 ? p.product_name.slice(0,48)+'...' : p.product_name;
+        var dataStr = JSON.stringify({name:p.product_name, ref:100, kcal:kcal, prot:prot, carb:carb, fiber:fiber}).replace(/"/g,'&quot;');
+        html += '<button class="search-result" data-food="'+dataStr+'">'
+              + '<div class="sr-name">'+name+'</div>'
+              + (brand ? '<div class="sr-brand">'+brand+'</div>' : '')
+              + '<div class="sr-macros">pour 100g &middot; '+kcal+' kcal &middot; <span class="p">'+prot+'g P</span> &middot; '+carb+'g G'+(fiber?' &middot; '+fiber+'g F':'')+'</div>'
+              + '</button>';
+      }
+      document.getElementById('search-results').innerHTML = html;
+      // Attach click events
+      var btns = document.getElementById('search-results').querySelectorAll('.search-result');
+      for (var j=0; j<btns.length; j++) {
+        btns[j].addEventListener('click', function(){
+          var food = JSON.parse(this.getAttribute('data-food').replace(/&quot;/g,'"'));
+          _sheetItem = food;
+          document.getElementById('sheet-title').textContent = food.name;
+          document.getElementById('qty-input').value = 100;
+          updatePreview();
+          document.getElementById('sheet-overlay').classList.add('open');
+          document.getElementById('sheet').classList.add('open');
+          setTimeout(function(){ document.getElementById('qty-input').select(); }, 350);
+          // Clear search
+          document.getElementById('search-input').value = '';
+          document.getElementById('search-results').innerHTML = '';
+          document.getElementById('search-status').innerHTML = '';
+          document.getElementById('search-clear').classList.remove('show');
+        });
+      }
+    })
+    .catch(function(){
+      document.getElementById('search-status').innerHTML = '<div class="search-status">Erreur reseau, reessayez</div>';
+    });
+}
  
 // ── Tabs ──
 var tabs = document.querySelectorAll('.tab');
