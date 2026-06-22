@@ -19,7 +19,7 @@
   }
   html { font-size: 15px; }
   body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100dvh; display: flex; flex-direction: column; }
-
+ 
   /* ── Header ── */
   header { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.7rem 1.1rem; }
   .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; }
@@ -41,20 +41,20 @@
   .goal-sm-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .goal-sm-val { font-size: 14px; font-weight: 600; }
   .goal-sm-val span { font-size: 10px; font-weight: 400; color: var(--muted); margin-left: 1px; }
-
+ 
   /* ── Tabs ── */
   .tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--bg); padding: 0 1.1rem; overflow-x: auto; }
   .tab { font-size: 13px; font-weight: 500; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 0.6rem 0; cursor: pointer; margin-right: 1.25rem; transition: color 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0; }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
   .tab:hover:not(.active) { color: var(--text); }
-
+ 
   /* ── Main ── */
   main { flex: 1; overflow-y: auto; padding: 1.1rem; max-width: 640px; width: 100%; margin: 0 auto; }
   .panel { display: none; }
   .panel.active { display: block; }
   .section-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hint); margin-bottom: 0.55rem; margin-top: 1.1rem; }
   .section-label:first-child { margin-top: 0; }
-
+ 
   /* ── Saisie rapide ── */
   .fast-box { background: var(--bg2); border: 1px solid var(--accent2); border-radius: 10px; padding: 12px; }
   .fast-row { display: grid; grid-template-columns: repeat(4, 1fr) auto; gap: 7px; align-items: flex-end; }
@@ -65,7 +65,7 @@
   .fast-add-btn { background: var(--accent); color: #1C1C1A; border: none; border-radius: 8px; font-family: var(--font); font-size: 22px; font-weight: 700; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, transform 0.1s; }
   .fast-add-btn:hover { background: #d08840; }
   .fast-add-btn:active { transform: scale(0.95); }
-
+ 
   /* ── Quick grid ── */
   .quick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 8px; }
   .qbtn { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; cursor: pointer; text-align: left; transition: background 0.12s, border-color 0.12s; }
@@ -75,7 +75,7 @@
   .qbtn-macros { font-size: 11px; color: var(--muted); margin-top: 3px; }
   .qbtn-macros .p { color: var(--green); }
   .qbtn-macros .f { color: var(--purple); }
-
+ 
   /* ── Forms ── */
   .form-grid { display: grid; gap: 10px; }
   .field label { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
@@ -88,7 +88,7 @@
   .btn-primary:active { transform: scale(0.98); }
   .btn-secondary { background: var(--bg2); color: var(--muted); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font); font-size: 13px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
-
+ 
   /* ── Log ── */
   .log-empty { text-align: center; color: var(--hint); font-size: 14px; padding: 3rem 0; }
   .log-entry { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
@@ -105,7 +105,7 @@
   .log-total { display: flex; justify-content: space-between; padding: 12px 0 0; border-top: 1px solid var(--border); margin-top: 4px; }
   .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .total-val { font-size: 13px; font-weight: 600; color: var(--text); }
-
+ 
   /* ── Ingredients editor ── */
   .ing-list { display: grid; gap: 8px; }
   .ing-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
@@ -129,11 +129,11 @@
   .ing-num-field input:focus { border-color: var(--accent); }
   .ing-save-btn { width: 100%; background: var(--accent); color: #1C1C1A; border: none; border-radius: 7px; font-family: var(--font); font-size: 13px; font-weight: 600; padding: 9px; cursor: pointer; transition: background 0.15s; }
   .ing-save-btn:hover { background: #d08840; }
-
+ 
   /* New ingredient form */
   .new-ing-card { background: var(--bg2); border: 1px dashed var(--border); border-radius: 10px; padding: 12px; }
   .new-ing-card .ing-form-name { margin-top: 0; }
-
+ 
   /* ── Settings ── */
   .settings-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; }
   .settings-card h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0.7rem; }
@@ -144,11 +144,11 @@
   .setting-row input:focus { border-color: var(--accent); }
   .danger-zone { margin-top: 1.5rem; }
   .danger-zone .settings-card { border-color: #4a2020; }
-
+ 
   /* ── Toast ── */
   #toast { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 8px 18px; font-size: 13px; color: var(--text); opacity: 0; transition: transform 0.22s, opacity 0.22s; pointer-events: none; white-space: nowrap; z-index: 100; }
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
+ 
   @media (max-width: 380px) {
     .fast-row { grid-template-columns: repeat(2, 1fr) auto; }
     .four-cols { grid-template-columns: repeat(2, 1fr); }
@@ -172,11 +172,11 @@
   .sheet-confirm { width: 100%; background: var(--accent); color: #1C1C1A; border: none; border-radius: 10px; font-family: var(--font); font-size: 15px; font-weight: 700; padding: 13px; cursor: pointer; transition: background 0.15s; }
   .sheet-confirm:hover { background: #d08840; }
   .sheet-cancel { width: 100%; background: none; border: none; color: var(--muted); font-family: var(--font); font-size: 14px; padding: 10px; cursor: pointer; margin-top: 6px; }
-
+ 
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="header-top">
     <span class="app-title">Macro Tracker</span>
@@ -211,16 +211,16 @@
     </div>
   </div>
 </header>
-
+ 
 <div class="tabs">
   <button class="tab active" data-tab="add">Ajouter</button>
   <button class="tab" data-tab="log">Journal</button>
   <button class="tab" data-tab="ingredients">Aliments</button>
   <button class="tab" data-tab="settings">Objectifs</button>
 </div>
-
+ 
 <main>
-
+ 
   <!-- Ajouter -->
   <div class="panel active" id="panel-add">
     <div class="section-label" style="margin-top:0">Saisie rapide — chiffres uniquement</div>
@@ -247,12 +247,12 @@
       <button class="btn-primary" id="btn-add">+ Ajouter au journal</button>
     </div>
   </div>
-
+ 
   <!-- Journal -->
   <div class="panel" id="panel-log">
     <div id="log-content"></div>
   </div>
-
+ 
   <!-- Aliments -->
   <div class="panel" id="panel-ingredients">
     <div class="section-label" style="margin-top:0">Modifier les raccourcis</div>
@@ -270,7 +270,7 @@
       <button class="ing-save-btn" id="btn-new-ing">+ Ajouter aux raccourcis</button>
     </div>
   </div>
-
+ 
   <!-- Objectifs -->
   <div class="panel" id="panel-settings">
     <div class="settings-card">
@@ -291,10 +291,10 @@
       </div>
     </div>
   </div>
-
+ 
 </main>
 <div id="toast"></div>
-
+ 
 <script>
 const DEFAULT_QUICK = [
   { id:1,  name:'Skyr',        kcal:98,  prot:16, carb:6,  fiber:0, ref:150 },
@@ -314,24 +314,26 @@ const DEFAULT_QUICK = [
   { id:15, name:'Banane',      kcal:90,  prot:1,  carb:23, fiber:3, ref:120 },
   { id:16, name:'Pomme',       kcal:55,  prot:0,  carb:14, fiber:2, ref:150 },
 ];
-
+ 
 const DAY_KEY = () => 'entries_' + new Date().toISOString().slice(0,10);
 function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch{ return d; } }
 function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} }
-
+ 
 let goals   = load('goals',   { kcal:1500, prot:150, carb:150, fiber:25 });
 let entries = load(DAY_KEY(), []);
 let quick   = load('quick',   DEFAULT_QUICK);
-
+// Migrate old items without ref field
+quick = quick.map(q => ({ ref: 100, ...q }));
+ 
 const fmt = n => Math.round(n);
 const pct = (v,m) => Math.min(100, Math.round(v/m*100));
-
+ 
 function totals(){
   return entries.reduce((a,e)=>{ a.kcal+=e.kcal; a.prot+=e.prot; a.carb+=e.carb; a.fiber+=e.fiber; return a; },
     { kcal:0, prot:0, carb:0, fiber:0 });
 }
 function fillClass(v,m){ const r=v/m; return r>=1.05?'over':r>=0.9?'ok':''; }
-
+ 
 function renderHeader(){
   const t = totals();
   document.getElementById('kcal-cur').innerHTML  = fmt(t.kcal)  + ' <span>kcal</span>';
@@ -351,17 +353,17 @@ function renderHeader(){
   pf.className = 'fill '+fillClass(t.prot,goals.prot);
   if(!pf.className.includes('ok')&&!pf.className.includes('over')) pf.style.background='var(--green)';
 }
-
+ 
 function renderQuick(){
   document.getElementById('quick-grid').innerHTML = quick.map(q=>{
     const fs = q.fiber ? ` · <span class="f">${q.fiber}g F</span>` : '';
-    return `<button class="qbtn" onclick='quickAdd(${JSON.stringify(q)})'>
+    return `<button class="qbtn" onclick="quickAdd(${q.id})">
       <div class="qbtn-name">${q.name}</div>
       <div class="qbtn-macros">${q.ref||100}g · <span class="p">${q.prot}g P</span>${fs}</div>
     </button>`;
   }).join('');
 }
-
+ 
 function renderLog(){
   const c = document.getElementById('log-content');
   if(!entries.length){
@@ -389,7 +391,7 @@ function renderLog(){
     <span class="total-val">${fmt(t.kcal)} kcal · ${fmt(t.prot)}g P · ${fmt(t.carb)}g G · ${fmt(t.fiber)}g F</span>
   </div>`;
 }
-
+ 
 function renderIngredients(){
   const list = document.getElementById('ing-list');
   list.innerHTML = quick.map((q,i)=>{
@@ -419,7 +421,7 @@ function renderIngredients(){
     </div>`;
   }).join('');
 }
-
+ 
 function toggleEdit(id){
   const form = document.getElementById('ing-form-'+id);
   const btn  = document.getElementById('edit-btn-'+id);
@@ -428,7 +430,7 @@ function toggleEdit(id){
   btn.textContent = open ? 'Fermer' : 'Modifier';
   if(open) document.getElementById('ing-n-'+id).focus();
 }
-
+ 
 function saveIng(id){
   const idx = quick.findIndex(q=>q.id===id);
   if(idx===-1) return;
@@ -446,7 +448,7 @@ function saveIng(id){
   renderQuick();
   toast('✓ '+quick[idx].name+' mis à jour');
 }
-
+ 
 function deleteIng(id){
   const q = quick.find(x=>x.id===id);
   if(!q || !confirm('Supprimer "'+q.name+'" des raccourcis ?')) return;
@@ -456,21 +458,21 @@ function deleteIng(id){
   renderQuick();
   toast('Aliment supprimé');
 }
-
+ 
 function renderSettings(){
   document.getElementById('s-kcal').value  = goals.kcal;
   document.getElementById('s-prot').value  = goals.prot;
   document.getElementById('s-carb').value  = goals.carb;
   document.getElementById('s-fiber').value = goals.fiber;
 }
-
+ 
 function render(){ renderHeader(); renderLog(); }
 function toast(msg){
   const el=document.getElementById('toast');
   el.textContent=msg; el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'),1800);
 }
-
+ 
 function addEntry(name, kcal, prot, carb, fiber){
   const time = new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
   entries.push({ id:Date.now(), name, kcal:+kcal||0, prot:+prot||0, carb:+carb||0, fiber:+fiber||0, time });
@@ -478,10 +480,12 @@ function addEntry(name, kcal, prot, carb, fiber){
   render();
   toast('✓ '+name+' ajouté');
 }
-
+ 
 let _sheetItem = null;
-
-function quickAdd(q){
+ 
+function quickAdd(id){
+  const q = quick.find(x=>x.id===id);
+  if(!q) return;
   _sheetItem = q;
   document.getElementById('sheet-title').textContent = q.name;
   document.getElementById('qty-input').value = q.ref || 100;
@@ -490,14 +494,14 @@ function quickAdd(q){
   document.getElementById('sheet').classList.add('open');
   setTimeout(()=>document.getElementById('qty-input').select(), 350);
 }
-
+ 
 function changeQty(delta){
   const inp = document.getElementById('qty-input');
   const v = Math.max(1, (parseInt(inp.value)||100) + delta);
   inp.value = v;
   updatePreview();
 }
-
+ 
 function updatePreview(){
   if(!_sheetItem) return;
   const grams = parseFloat(document.getElementById('qty-input').value) || 100;
@@ -508,12 +512,12 @@ function updatePreview(){
   document.getElementById('prev-carb').textContent  = Math.round(_sheetItem.carb  * ratio) + 'g';
   document.getElementById('prev-fiber').textContent = Math.round(_sheetItem.fiber * ratio) + 'g';
 }
-
+ 
 function closeSheet(){
   document.getElementById('sheet-overlay').classList.remove('open');
   document.getElementById('sheet').classList.remove('open');
 }
-
+ 
 document.getElementById('sheet-confirm').addEventListener('click', ()=>{
   if(!_sheetItem) return;
   const grams = parseFloat(document.getElementById('qty-input').value) || 100;
@@ -526,13 +530,13 @@ document.getElementById('sheet-confirm').addEventListener('click', ()=>{
     _sheetItem.fiber * ratio);
   closeSheet();
 });
-
+ 
 function remove(id){
   entries = entries.filter(e=>e.id!==id);
   save(DAY_KEY(), entries);
   render();
 }
-
+ 
 // Tabs
 document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -544,7 +548,7 @@ document.querySelectorAll('.tab').forEach(btn=>{
     if(tab==='ingredients') renderIngredients();
   });
 });
-
+ 
 // Saisie rapide
 document.getElementById('btn-fast').addEventListener('click',()=>{
   const kcal=document.getElementById('f-kcal').value, prot=document.getElementById('f-prot').value,
@@ -555,7 +559,7 @@ document.getElementById('btn-fast').addEventListener('click',()=>{
   ['f-kcal','f-prot','f-carb','f-fiber'].forEach(id=>document.getElementById(id).value='');
 });
 document.getElementById('f-fiber').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('btn-fast').click(); });
-
+ 
 // Manuel
 document.getElementById('btn-add').addEventListener('click',()=>{
   const name=document.getElementById('inp-name').value.trim();
@@ -565,7 +569,7 @@ document.getElementById('btn-add').addEventListener('click',()=>{
   ['inp-name','inp-kcal','inp-prot','inp-carb','inp-fiber'].forEach(id=>document.getElementById(id).value='');
 });
 document.getElementById('inp-fiber').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('btn-add').click(); });
-
+ 
 // Nouvel aliment
 document.getElementById('btn-new-ing').addEventListener('click',()=>{
   const name=document.getElementById('new-ing-name').value.trim();
@@ -587,7 +591,7 @@ document.getElementById('btn-new-ing').addEventListener('click',()=>{
   toast('✓ '+name+' ajouté aux raccourcis');
 });
 document.getElementById('new-ing-fiber').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('btn-new-ing').click(); });
-
+ 
 // Objectifs
 document.getElementById('btn-save-goals').addEventListener('click',()=>{
   goals.kcal=parseInt(document.getElementById('s-kcal').value)||1500;
@@ -596,23 +600,23 @@ document.getElementById('btn-save-goals').addEventListener('click',()=>{
   goals.fiber=parseInt(document.getElementById('s-fiber').value)||25;
   save('goals',goals); render(); toast('Objectifs enregistrés');
 });
-
+ 
 // Reset
 document.getElementById('btn-reset').addEventListener('click',()=>{
   if(!confirm('Remettre le journal à zéro ?')) return;
   entries=[]; save(DAY_KEY(),entries); render(); toast('Journal remis à zéro');
 });
-
+ 
 // Date
 const d=new Date();
 document.getElementById('date-badge').textContent=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'});
-
+ 
 // Init
 renderQuick(); renderSettings(); render();
 const ms=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)-d;
 setTimeout(()=>{ entries=[]; save(DAY_KEY(),entries); render(); }, ms);
 </script>
-
+ 
 <!-- Bottom sheet quantité -->
 <div class="sheet-overlay" id="sheet-overlay" onclick="closeSheet()"></div>
 <div class="sheet" id="sheet">
